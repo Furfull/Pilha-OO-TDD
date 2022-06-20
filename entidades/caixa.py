@@ -41,3 +41,6 @@ class Caixa:
     
     def disponivel(self) -> bool:
         return self.status == StatusCaixaEnum.DISPONIVEL
+
+    def atendendo(self) -> bool:
+        return self.status == StatusCaixaEnum.EM_ATENDIMENTO

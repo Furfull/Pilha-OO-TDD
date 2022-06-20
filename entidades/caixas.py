@@ -6,7 +6,7 @@ from fila_atendimento import FilaAtendimento
 
 class AtendimentoCaixas():
 
-    def __init__(self, numero_de_caixas):
+    def __init__(self, numero_de_caixas: int):
         self.fila_atendimento: FilaAtendimento = FilaAtendimento()
         self.caixas: List[Caixa] = [] 
         for i in range(numero_de_caixas):
@@ -19,22 +19,46 @@ class AtendimentoCaixas():
                 caixa.atender_cliente(cliente)
                 return 
         self.fila_atendimento.entrar(cliente)
-        return self.fila_atendimento.fila_atendimento
+
+    def finalizar_atendimento(self) -> None:
+        for caixa in self.caixas:
+            if caixa.atendendo():
+                caixa.finalizar_atendimento()
+                return
+    
+    def atender_fila(self) -> None:
+        for caixa in self.caixas:
+            if caixa.disponivel():
+                caixa.atender_cliente(self.fila_atendimento.proximo())
+                return
+
+    def fechar_caixa(self, numero_caixa: int) -> None:
+        for indice, caixa in enumerate(self.caixas):
+            if indice == numero_caixa:
+                caixa.fechar()
+                return
+    
+    def abrir_caixa(self, numero_caixa: int) -> None:
+        for indice, caixa in enumerate(self.caixas):
+            if indice == numero_caixa:
+                caixa.abrir()
+                return
+        
+                
+
+# atendimentocaixas = AtendimentoCaixas(5)
+# cliente = Cliente("123", "Levi", "dkfndf")
+# cliente2 = Cliente("1234", "Levi", "dkfndfds")
+
+# #print(atendimentocaixas.teste())
 
 
-atendimentocaixas = AtendimentoCaixas(5)
-cliente = Cliente("123", "Levi", "dkfndf")
-cliente2 = Cliente("1234", "Levi", "dkfndfds")
+# atendimentocaixas.atender_cliente(cliente)
+# atendimentocaixas.atender_cliente(cliente)
+# atendimentocaixas.atender_cliente(cliente)
+# atendimentocaixas.atender_cliente(cliente)
+# atendimentocaixas.atender_cliente(cliente)
+# atendimentocaixas.atender_cliente(cliente)
 
-#print(atendimentocaixas.teste())
-
-
-atendimentocaixas.atender_cliente(cliente)
-atendimentocaixas.atender_cliente(cliente)
-atendimentocaixas.atender_cliente(cliente)
-atendimentocaixas.atender_cliente(cliente)
-atendimentocaixas.atender_cliente(cliente)
-atendimentocaixas.atender_cliente(cliente)
-
-print(atendimentocaixas.atender_cliente(cliente2))
+# print(atendimentocaixas.caixas[0].cliente)
 

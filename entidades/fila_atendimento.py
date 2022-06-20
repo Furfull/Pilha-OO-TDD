@@ -17,4 +17,7 @@ class FilaAtendimento():
     
     def numero_de_clientes(self) -> int:
         return len(self.fila_atendimento)
+    
+    def status_fila(self) -> bool:
+        return len(self.fila_atendimento) > 0
 
