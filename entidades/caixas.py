@@ -43,7 +43,12 @@ class AtendimentoCaixas():
             if indice == numero_caixa:
                 caixa.abrir()
                 return
-        
+
+    def tamanho_caixas(self) -> int:
+        return len(self.caixas)
+
+    def tamanho_fila(self) -> int:
+        return self.fila_atendimento.numero_de_clientes()
                 
 
 # atendimentocaixas = AtendimentoCaixas(5)
